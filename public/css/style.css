@@ -3,6 +3,6 @@
     grid-template-columns: repeat(4, 1fr);
 }
 
-.foods {
-    margin: 10px;
+#foodDetailInfo img {
+    border-radius: 10px;
 }

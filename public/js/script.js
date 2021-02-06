@@ -3,12 +3,13 @@
 // .then(data => {
 //     console.log(data.meals[0].strMeal);
 // })
+const mainAPI = "https://www.themealdb.com/api/json/v1/1/search.php";
 
 const search = document.getElementById("search");
 search.addEventListener("click", function () {
     // alert("clicked");
     const meal = document.getElementById("meal").value;
-    const mainAPI = "https://www.themealdb.com/api/json/v1/1/search.php";
+    // const mainAPI = "https://www.themealdb.com/api/json/v1/1/search.php";
     const url = `${mainAPI}?s=${meal}`;
     // console.log(url);
     fetch(url)
@@ -20,32 +21,67 @@ search.addEventListener("click", function () {
             const menuList = document.getElementById("menuList");
             food.forEach(foods => {
                 const foodDiv = document.createElement("div");
-                foodDiv.className = "foods";
+                foodDiv.className = "foods mt-5";
                 const foodInfo = `
                     <div class="card" style="width: 18rem;">
                     <img src="${foods.strMealThumb}" class="card-img-top img-thumbnail" alt="...">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <h5 class="card-title">${foods.strMeal}</h5>
+                        <button class="btn btn-primary btn-sm" onclick="foodDetail('${foods.strMeal}')">Show Detail</button>
                     </div>
                     </div>
                 `
                 foodDiv.innerHTML = foodInfo;
                 menuList.appendChild(foodDiv);
             });
-            // const countriesDiv = document.getElementById("countryList");
-            // data.forEach(countries => {
-            //     const countryDiv = document.createElement("div");
-        
-            //     countryDiv.className = "country"
-        
-            //     const countryInfo = `
-            //             <h3>${countries.name}</h3>
-            //             <h5>${countries.capital}</h5>
-            //             <button class="btn btn-primary" onclick="countryDetail('${countries.name}')">Show Detail</button>
-            //         `
-        
-            //     countryDiv.innerHTML = countryInfo;
-            //     countriesDiv.appendChild(countryDiv);
-            // });
+
+            
         }
+
+        
+
+        
 });
+
+const foodDetail = (foodname) => {
+    const url = `${mainAPI}?s=${foodname}`
+    // console.log(url);
+    fetch(url)
+    .then(res => res.json())
+    .then(data => foodInformation(data.meals[0]));
+}
+
+const foodInformation = food => {
+    console.log(food.strMeal);
+    const foodFullDetail = document.getElementById("foodDetailInfo");
+    foodFullDetail.innerHTML = `
+        <img width="400" height="200" class="img-fluid" src="${food.strMealThumb}">
+        <h1>${food.strMeal}</h1>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." Checked>
+                ${food.strIngredient1}
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." Checked>
+                ${food.strIngredient2}
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." Checked>
+                ${food.strIngredient3}
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." Checked>
+                ${food.strIngredient4}
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." Checked>
+                ${food.strIngredient5}
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." Checked>
+                ${food.strIngredient6}
+            </li>
+        </ul>
+    `
+}
