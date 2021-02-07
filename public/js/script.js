@@ -12,6 +12,7 @@ search.addEventListener("click", function () {
     // const mainAPI = "https://www.themealdb.com/api/json/v1/1/search.php";
     const url = `${mainAPI}?s=${meal}`;
     // console.log(url);
+    // document.getElementById("meal").innerHTML ="";
     fetch(url)
         .then(res => res.json())
         .then(data => mealMenu(data.meals));
@@ -23,11 +24,10 @@ search.addEventListener("click", function () {
                 const foodDiv = document.createElement("div");
                 foodDiv.className = "foods mt-5";
                 const foodInfo = `
-                    <div class="card" style="width: 18rem;">
+                    <div class="card" style="width: 18rem;" onclick="foodDetail('${foods.strMeal}')">
                     <img src="${foods.strMealThumb}" class="card-img-top img-thumbnail" alt="...">
                     <div class="card-body text-center">
                         <h5 class="card-title">${foods.strMeal}</h5>
-                        <button class="btn btn-primary btn-sm" onclick="foodDetail('${foods.strMeal}')">Show Detail</button>
                     </div>
                     </div>
                 `
@@ -38,7 +38,7 @@ search.addEventListener("click", function () {
             
         }
 
-        
+        document.getElementById("menuList").innerHTML = "";
 
         
 });
@@ -57,6 +57,7 @@ const foodInformation = food => {
     foodFullDetail.innerHTML = `
         <img width="400" height="200" class="img-fluid" src="${food.strMealThumb}">
         <h1>${food.strMeal}</h1>
+        <h3>Ingredients</h3>
         <ul class="list-group">
             <li class="list-group-item">
                 <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." Checked>
