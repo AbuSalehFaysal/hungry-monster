@@ -1,22 +1,15 @@
-// fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=burger")
-// .then(res => res.json())
-// .then(data => {
-//     console.log(data.meals[0].strMeal);
-// })
 const mainAPI = "https://www.themealdb.com/api/json/v1/1/search.php";
 
+// =============================================
+// SEARCH BUTTON FUNCTIONALITY
+// =============================================
 const search = document.getElementById("search");
 search.addEventListener("click", function () {
-    // alert("clicked");
     const meal = document.getElementById("meal").value;
-    // const mainAPI = "https://www.themealdb.com/api/json/v1/1/search.php";
     const url = `${mainAPI}?s=${meal}`;
-    // console.log(url);
-    // document.getElementById("meal").innerHTML ="";
     fetch(url)
         .then(res => res.json())
         .then(data => mealMenu(data.meals));
-
         const mealMenu = (food) => {
             console.log(food);
             const menuList = document.getElementById("menuList");
@@ -33,20 +26,17 @@ search.addEventListener("click", function () {
                 `
                 foodDiv.innerHTML = foodInfo;
                 menuList.appendChild(foodDiv);
-            });
-
-            
+            }); 
         }
-
         document.getElementById("menuList").innerHTML = "";
         document.getElementById("foodDetailInfo").innerHTML = "";
-
-        
 });
 
+// ====================================================
+// SHOW FOOD DETAIL INFORMATION FUNCTIONALITY
+// ====================================================
 const foodDetail = (foodname) => {
     const url = `${mainAPI}?s=${foodname}`
-    // console.log(url);
     fetch(url)
     .then(res => res.json())
     .then(data => foodInformation(data.meals[0]));
