@@ -10,8 +10,11 @@ search.addEventListener("click", function () {
     fetch(url)
         .then(res => res.json())
         .then(data => mealMenu(data.meals));
-        const mealMenu = (food) => {
-            console.log(food);
+    const mealMenu = (food) => {
+        console.log(food);
+        if (food == null) {
+            document.getElementById("notice").innerText = "No Results Found!";
+        } else {
             const menuList = document.getElementById("menuList");
             food.forEach(foods => {
                 const foodDiv = document.createElement("div");
@@ -26,10 +29,12 @@ search.addEventListener("click", function () {
                 `
                 foodDiv.innerHTML = foodInfo;
                 menuList.appendChild(foodDiv);
-            }); 
+            });
         }
-        document.getElementById("menuList").innerHTML = "";
-        document.getElementById("foodDetailInfo").innerHTML = "";
+
+    }
+    document.getElementById("menuList").innerHTML = "";
+    document.getElementById("foodDetailInfo").innerHTML = "";
 });
 
 // ====================================================
@@ -38,8 +43,8 @@ search.addEventListener("click", function () {
 const foodDetail = (foodname) => {
     const url = `${mainAPI}?s=${foodname}`
     fetch(url)
-    .then(res => res.json())
-    .then(data => foodInformation(data.meals[0]));
+        .then(res => res.json())
+        .then(data => foodInformation(data.meals[0]));
 }
 
 const foodInformation = food => {
