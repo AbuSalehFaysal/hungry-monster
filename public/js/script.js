@@ -35,6 +35,7 @@ search.addEventListener("click", function () {
     }
     document.getElementById("menuList").innerHTML = "";
     document.getElementById("foodDetailInfo").innerHTML = "";
+    document.getElementById("notice").innerText = "";
 });
 
 // ====================================================
