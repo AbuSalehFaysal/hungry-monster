@@ -13,7 +13,7 @@ search.addEventListener("click", function () {
     const mealMenu = (food) => {
         console.log(food);
         if (food == null) {
-            document.getElementById("notice").innerText = "No Results Found!";
+            document.getElementById("notice").innerText = "Sorry, No Results Found!";
         } else {
             const menuList = document.getElementById("menuList");
             food.forEach(foods => {
