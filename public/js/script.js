@@ -11,7 +11,6 @@ search.addEventListener("click", function () {
         .then(res => res.json())
         .then(data => mealMenu(data.meals));
     const mealMenu = (food) => {
-        console.log(food);
         if (food == null) {
             document.getElementById("notice").innerText = "Sorry, No Results Found!";
         } else {
@@ -49,7 +48,6 @@ const foodDetail = (foodname) => {
 }
 
 const foodInformation = food => {
-    console.log(food.strMeal);
     const foodFullDetail = document.getElementById("foodDetailInfo");
     foodFullDetail.innerHTML = `
         <img width="400" height="200" class="img-fluid" src="${food.strMealThumb}">
